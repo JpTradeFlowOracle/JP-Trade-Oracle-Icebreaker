@@ -4,10 +4,12 @@
 ## 📊 Project Overview
 JP-Trade-Oracle Icebreaker is an autonomous data node designed to detect
 **Structural Margin Anomalies** within the Japanese supply chain.
-By cross-referencing real-time CPI data with official **e-Stat**
-(Government Statistics) releases, this engine quantifies the "Economic Gap"
-— the disparity between market price movements and baseline inflation
-caused by intermediary inefficiencies.
+
+Two independent analytical engines run in parallel:
+
+**V1 — CPI Signal:** Cross-references real-time CPI data with official **e-Stat** releases to quantify how far each item is rising above Japan's inflation baseline. FX-adjusted delta strips out yen depreciation to isolate domestic gouging from currency effects.
+
+**anomaly_core — Cost Signal:** A multivariate regression engine trained on 36 months of import costs, freight rates, exchange rates, wages, and energy prices. Outputs an **SJ-Score** — the statistically standardized gap between what retail prices *should* be given actual input costs, and what they *are*. When both signals fire simultaneously, the combined verdict is **CONFIRMED**.
 
 ## ⚡ API Specifications
 Optimized for **Machine-to-Machine (M2M)** integration.
@@ -19,18 +21,32 @@ Japanese economic health in real time.
 - **Docs:** `https://specimen-coveted-angular.ngrok-free.dev/docs`
 
 ## 💰 Pricing
-- **Rate:** $0.01 USDC per Analytical Request
+- **Rate:** $0.XX USDC per Analytical Request
 - **Protocol:** Skyfire
 
 ## 🔍 Analytical Metrics
-- **Delta Index:** Quantifies price divergence from baseline CPI inflation
+
+**V1 Signals**
+- **Delta Index:** Price divergence from baseline CPI inflation
+- **FX-Adjusted Delta:** Delta with yen depreciation stripped out
 - **Alert Levels:** EXTREME / WARNING / WATCH / FAIR
-- **Sector Coverage:** Energy, Food, IT/Services, Logistics, Housing, Medical, Industrial, Macro
+
+**anomaly_core Signals**
+- **SJ-Score:** Cost-justified price deviation (σ units, Huber regression)
+- **Signal Strength:** UI-ready intensity indicator (0.0–1.0)
+- **Confidence:** Model reliability score (R² × 0.6 + sign consistency × 0.4)
+- **Combined Verdict:** CONFIRMED / POSSIBLE / FAIR
+- **Reason Codes:** Machine-readable causal flags (e.g. `IMPORT_COST_DOWN`, `PRICE_STICKINESS`)
+- **Summary JP:** Japanese-language narrative for human review
+
+**Coverage**
+- **Sectors:** Energy, Food, IT/Services, Logistics, Housing, Medical, Industrial, Macro
 - **Update Cycle:** Every 12 hours
 
 ## 🛠️ Tech Stack
 - **Runtime:** Python / FastAPI
-- **Data Source:** e-Stat API (Ministry of Internal Affairs / Ministry of Health, Labour and Welfare)
+- **Data Sources:** e-Stat · FRED · USDA MARS · USDA GTR · Bank of Japan API · Ministry of Health, Labour and Welfare
+- **Model:** PCA + HuberRegressor · EWM rolling z-score · TimeSeriesCV lag optimization
 - **Auth:** Skyfire Protocol (ES256 JWT / JWKS)
 - **Deployment:** Edge node via ngrok
 
