@@ -1,1 +1,496 @@
-{"openapi":"3.1.0","info":{"title":"JP-Trade-Oracle Icebreaker","description":"物価中抜き検出API。delta: 全品目共通=品目前年比-CPI総合前年比。SVC items: サービス産業動態統計調査 (総務省 statsDataId=0004024060)。認証: Skyfire JWT (ES256/JWKS) skyfire-pay-id ヘッダー。","version":"13.5.0"},"paths":{"/analyze":{"post":{"summary":"Analyze","operationId":"analyze_analyze_post","parameters":[{"name":"skyfire-pay-id","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Skyfire-Pay-Id"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/MarketDataRequest"}}}},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/FinalReport"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}}},"components":{"schemas":{"FinalReport":{"properties":{"oracle_timestamp_utc":{"type":"string","title":"Oracle Timestamp Utc"},"item_name":{"type":"string","title":"Item Name"},"sector":{"type":"string","title":"Sector"},"data_type":{"type":"string","title":"Data Type"},"raw_value":{"type":"number","title":"Raw Value"},"base_yoy":{"type":"number","title":"Base Yoy"},"delta":{"type":"number","title":"Delta"},"alert_level":{"type":"string","title":"Alert Level"},"is_anomaly":{"type":"boolean","title":"Is Anomaly"},"report_jp":{"type":"string","title":"Report Jp"}},"type":"object","required":["oracle_timestamp_utc","item_name","sector","data_type","raw_value","base_yoy","delta","alert_level","is_anomaly","report_jp"],"title":"FinalReport"},"HTTPValidationError":{"properties":{"detail":{"items":{"$ref":"#/components/schemas/ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"},"MarketDataRequest":{"properties":{"target_name":{"type":"string","title":"Target Name","example":"it_service"},"sector":{"type":"string","enum":["energy","food_basic","food_process","it_infra","logistics","housing","medical","industrial","macro"],"title":"Sector"},"context_note":{"anyOf":[{"type":"string","maxLength":200},{"type":"null"}],"title":"Context Note"}},"type":"object","required":["target_name","sector"],"title":"MarketDataRequest"},"ValidationError":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"}}}}
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "JP-Trade-Oracle Icebreaker",
+    "description": "物価中抜き検出API。delta: 全品目共通=品目前年比-CPI総合前年比。SVC items: サービス産業動態統計調査 (総務省 statsDataId=0004024060)。認証: Skyfire JWT (ES256/JWKS) skyfire-pay-id ヘッダー。anomaly_core: SJ-Scoreによるコストベース異常検知（ENABLE_ANOMALY_CORE=true で有効）。",
+    "version": "13.8.0"
+  },
+  "paths": {
+    "/analyze": {
+      "post": {
+        "summary": "Analyze",
+        "operationId": "analyze_analyze_post",
+        "parameters": [
+          {
+            "name": "skyfire-pay-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Skyfire-Pay-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarketDataRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinalReport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/summary": {
+      "get": {
+        "summary": "Summary",
+        "description": "全品目のランキングを1リクエストで返すエンドポイント。\nfetch_and_sort.py が12時間ごとに生成する summary_for_agents.json を読み込む。\n/analyze を32回叩く代わりにこちら1回で全品目取得可能。",
+        "operationId": "summary_summary_get",
+        "parameters": [
+          {
+            "name": "skyfire-pay-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Skyfire-Pay-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SummaryReport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FinalReport": {
+        "properties": {
+          "oracle_timestamp_utc": {
+            "type": "string",
+            "title": "Oracle Timestamp Utc"
+          },
+          "item_name": {
+            "type": "string",
+            "title": "Item Name"
+          },
+          "sector": {
+            "type": "string",
+            "title": "Sector"
+          },
+          "data_type": {
+            "type": "string",
+            "title": "Data Type"
+          },
+          "raw_value": {
+            "type": "number",
+            "title": "Raw Value"
+          },
+          "base_yoy": {
+            "type": "number",
+            "title": "Base Yoy"
+          },
+          "delta": {
+            "type": "number",
+            "title": "Delta"
+          },
+          "usdjpy_yoy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usdjpy Yoy"
+          },
+          "fx_adjusted_delta": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fx Adjusted Delta"
+          },
+          "alert_level": {
+            "type": "string",
+            "title": "Alert Level"
+          },
+          "is_anomaly": {
+            "type": "boolean",
+            "title": "Is Anomaly"
+          },
+          "report_jp": {
+            "type": "string",
+            "title": "Report Jp"
+          },
+          "anomaly_core": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SJScoreDetail"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "oracle_timestamp_utc",
+          "item_name",
+          "sector",
+          "data_type",
+          "raw_value",
+          "base_yoy",
+          "delta",
+          "usdjpy_yoy",
+          "fx_adjusted_delta",
+          "alert_level",
+          "is_anomaly",
+          "report_jp"
+        ],
+        "title": "FinalReport"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MarketDataRequest": {
+        "properties": {
+          "target_name": {
+            "type": "string",
+            "title": "Target Name",
+            "example": "it_service"
+          },
+          "sector": {
+            "type": "string",
+            "enum": [
+              "energy",
+              "food_basic",
+              "food_process",
+              "it_infra",
+              "logistics",
+              "housing",
+              "medical",
+              "industrial",
+              "macro"
+            ],
+            "title": "Sector"
+          },
+          "context_note": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_name",
+          "sector"
+        ],
+        "title": "MarketDataRequest"
+      },
+      "SJScoreDetail": {
+        "properties": {
+          "target_month": {
+            "type": "string",
+            "title": "Target Month"
+          },
+          "actual_price": {
+            "type": "number",
+            "title": "Actual Price"
+          },
+          "expected_price": {
+            "type": "number",
+            "title": "Expected Price"
+          },
+          "sj_score": {
+            "type": "number",
+            "title": "Sj Score"
+          },
+          "signal_strength": {
+            "type": "number",
+            "title": "Signal Strength"
+          },
+          "signals": {
+            "$ref": "#/components/schemas/SJScoreSignals"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reason Codes"
+          },
+          "summary_jp": {
+            "type": "string",
+            "title": "Summary Jp"
+          },
+          "drivers": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Drivers"
+          },
+          "model_meta": {
+            "$ref": "#/components/schemas/SJScoreModelMeta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_month",
+          "actual_price",
+          "expected_price",
+          "sj_score",
+          "signal_strength",
+          "signals",
+          "confidence",
+          "reason_codes",
+          "summary_jp",
+          "drivers",
+          "model_meta"
+        ],
+        "title": "SJScoreDetail"
+      },
+      "SJScoreModelMeta": {
+        "properties": {
+          "sample_months": {
+            "type": "integer",
+            "title": "Sample Months"
+          },
+          "cif_lag": {
+            "type": "integer",
+            "title": "Cif Lag"
+          },
+          "dom_lag": {
+            "type": "integer",
+            "title": "Dom Lag"
+          },
+          "r2": {
+            "type": "number",
+            "title": "R2"
+          },
+          "rmse": {
+            "type": "number",
+            "title": "Rmse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sample_months",
+          "cif_lag",
+          "dom_lag",
+          "r2",
+          "rmse"
+        ],
+        "title": "SJScoreModelMeta"
+      },
+      "SJScoreSignals": {
+        "properties": {
+          "cpi_signal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cpi Signal"
+          },
+          "cost_signal": {
+            "type": "string",
+            "title": "Cost Signal"
+          },
+          "combined": {
+            "type": "string",
+            "title": "Combined"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cpi_signal",
+          "cost_signal",
+          "combined"
+        ],
+        "title": "SJScoreSignals"
+      },
+      "SummaryReport": {
+        "properties": {
+          "oracle_timestamp_utc": {
+            "type": "string",
+            "title": "Oracle Timestamp Utc"
+          },
+          "last_update": {
+            "type": "string",
+            "title": "Last Update"
+          },
+          "base_yoy": {
+            "type": "number",
+            "title": "Base Yoy"
+          },
+          "usdjpy_yoy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usdjpy Yoy"
+          },
+          "item_count": {
+            "type": "integer",
+            "title": "Item Count"
+          },
+          "ranking": {
+            "items": {},
+            "type": "array",
+            "title": "Ranking"
+          },
+          "service_index": {
+            "items": {},
+            "type": "array",
+            "title": "Service Index"
+          },
+          "note": {
+            "type": "string",
+            "title": "Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "oracle_timestamp_utc",
+          "last_update",
+          "base_yoy",
+          "usdjpy_yoy",
+          "item_count",
+          "ranking",
+          "service_index",
+          "note"
+        ],
+        "title": "SummaryReport"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
