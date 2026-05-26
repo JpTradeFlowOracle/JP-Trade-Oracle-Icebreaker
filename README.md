@@ -21,7 +21,7 @@ Japanese economic health in real time.
 - **Docs:** `https://specimen-coveted-angular.ngrok-free.dev/docs`
 
 ## 💰 Pricing
-- **Rate:** $0.XX USDC per Analytical Request
+- **Rate:** $0.30 USDC per Analytical Request
 - **Protocol:** Skyfire
 
 ## 🔍 Analytical Metrics
