@@ -17,8 +17,8 @@ AI agents and financial models can programmatically query
 Japanese economic health in real time.
 
 - **Status:** Operational
-- **Endpoint:** `https://specimen-coveted-angular.ngrok-free.dev`
-- **Docs:** `https://specimen-coveted-angular.ngrok-free.dev/docs`
+- **Endpoint:** `https://ifgk6mi0oc.execute-api.ap-northeast-1.amazonaws.com`
+- **Docs:** `https://ifgk6mi0oc.execute-api.ap-northeast-1.amazonaws.com/docs`
 
 ## 💰 Pricing
 - **Rate:** $0.30 USDC per Analytical Request
@@ -48,7 +48,7 @@ Japanese economic health in real time.
 - **Data Sources:** e-Stat · FRED · USDA MARS · USDA GTR · Bank of Japan API · Ministry of Health, Labour and Welfare
 - **Model:** PCA + HuberRegressor · EWM rolling z-score · TimeSeriesCV lag optimization
 - **Auth:** Skyfire Protocol (ES256 JWT / JWKS)
-- **Deployment:** Edge node via ngrok
+- **Deployment:** AWS Lambda + API Gateway
 
 ---
 *Developed by **JpTradeFlowOracle** — Bridging the gap between raw government data and actionable economic intelligence.*
