@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — JP-Trade-Oracle Icebreaker</title>
+<style>
+  :root {
+    --paper: #F7F8F5;
+    --paper-line: #DADED4;
+    --ink: #16233D;
+    --ink-soft: #4A5568;
+    --signal-fair: #2F6F6D;
+    --signal-watch: #A67C2E;
+    --signal-warning: #B5502E;
+    --signal-extreme: #8B2E3C;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, 'Courier New', monospace;
+    --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Noto Serif', serif;
+    --sans: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 120px;
+  }
+
+  header.doc-head {
+    padding: 56px 0 32px;
+    border-bottom: 1px solid var(--paper-line);
+    margin-bottom: 40px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.15;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin: 0 0 24px;
+  }
+
+  /* Signal legend — signature element, reuses the API's own alert-level vocabulary */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border: 1px solid var(--paper-line);
+    border-radius: 3px;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .legend div {
+    flex: 1 1 auto;
+    padding: 9px 12px;
+    border-right: 1px solid var(--paper-line);
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+  .legend div:last-child { border-right: none; }
+  .legend .fair { background: var(--signal-fair); }
+  .legend .watch { background: var(--signal-watch); }
+  .legend .warning { background: var(--signal-warning); }
+  .legend .extreme { background: var(--signal-extreme); }
+  .legend-caption {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+
+  section {
+    margin-bottom: 36px;
+  }
+
+  .clause-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--signal-fair);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.06em;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 21px;
+    margin: 0 0 12px;
+    letter-spacing: -0.005em;
+  }
+
+  p { margin: 0 0 12px; font-size: 15.5px; color: var(--ink); }
+  p.dim { color: var(--ink-soft); font-size: 14px; }
+
+  ul { margin: 0 0 12px; padding-left: 20px; }
+  li { margin-bottom: 6px; font-size: 15.5px; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: #EDEFEA;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--paper-line);
+    margin: 40px 0;
+  }
+
+  footer {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    padding-top: 24px;
+    border-top: 1px solid var(--paper-line);
+  }
+
+  footer a { color: var(--signal-fair); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  .notice {
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: #EDEFEA;
+    border-left: 3px solid var(--signal-watch);
+    padding: 12px 16px;
+    border-radius: 0 3px 3px 0;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 520px) {
+    .legend { flex-direction: column; }
+    .legend div { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc-head">
+    <p class="eyebrow">JP-Trade-Oracle Icebreaker · Legal</p>
+    <h1>Terms of Service</h1>
+    <p class="subtitle">Governs programmatic access to the JP-Trade-Oracle Icebreaker API ("the Service"), including the JP-Structural Margin Oracle endpoint, operated as part of the JP-Trade-Oracle-PRO project.</p>
+    <div class="legend">
+      <div class="fair">FAIR</div>
+      <div class="watch">WATCH</div>
+      <div class="warning">WARNING</div>
+      <div class="extreme">EXTREME</div>
+    </div>
+    <p class="legend-caption">Effective date: 2026-07-03 · Last updated: 2026-07-03</p>
+  </header>
+
+  <div class="notice">
+    This document is a standard operating template for a machine-to-machine API service and has not been reviewed by a lawyer for any specific jurisdiction. It is provided so buyer agents and platforms (including Skyfire and x402 facilitators) have a stable reference URL, not as a substitute for professional legal advice.
+  </div>
+
+  <section>
+    <span class="clause-num">§1</span>
+    <h2>The Service</h2>
+    <p>The Service provides structured, machine-readable economic indicators for the Japanese market — including CPI deviation deltas, FX-adjusted deltas, and the SJ-Score cost-justification model — derived from public government and institutional data sources (e-Stat, FRED, USDA GATS/MARS, Bank of Japan, Ministry of Health, Labour and Welfare). Output is returned via the <code>/analyze</code> and <code>/summary</code> endpoints described in the Service's OpenAPI specification.</p>
+  </section>
+
+  <section>
+    <span class="clause-num">§2</span>
+    <h2>Access &amp; Authentication</h2>
+    <p>Access is granted per-request upon successful payment through one of the following channels:</p>
+    <ul>
+      <li><strong>Skyfire</strong> — a valid <code>pay</code> or <code>kya-pay</code> JWT presented via the <code>skyfire-pay-id</code> header, charged through the Skyfire settlement network.</li>
+      <li><strong>x402</strong> — a signed USDC payment authorization on Base Mainnet, presented via the x402 payment flow at the <code>/x402/*</code> endpoints.</li>
+    </ul>
+    <p>Requests without a valid payment credential will receive an HTTP <code>402 Payment Required</code> response and no data will be returned.</p>
+  </section>
+
+  <section>
+    <span class="clause-num">§3</span>
+    <h2>Pricing &amp; Payment</h2>
+    <p>The Service is billed per request at the rate published in the Service's Skyfire directory listing and x402 route configuration at the time of the request. Payments settled on-chain via x402 are final and irreversible by the nature of the underlying blockchain transaction; Skyfire-settled payments follow Skyfire's own settlement and dispute processes. The Operator does not independently process refunds for completed, successfully-served requests.</p>
+  </section>
+
+  <section>
+    <span class="clause-num">§4</span>
+    <h2>Data Accuracy &amp; No Advice</h2>
+    <p>Data is aggregated from public sources on a best-effort basis and updated on a recurring schedule (typically every 12 hours). The Operator does not warrant the completeness, accuracy, or timeliness of any figure, score, or alert level returned by the Service. Output — including the SJ-Score, delta calculations, and alert levels (FAIR / WATCH / WARNING / EXTREME) — is informational only and does not constitute financial, investment, legal, or trading advice. Buyers are responsible for independently verifying any data point before relying on it for a decision.</p>
+  </section>
+
+  <section>
+    <span class="clause-num">§5</span>
+    <h2>Acceptable Use</h2>
+    <ul>
+      <li>Do not attempt to bypass, spoof, or replay payment credentials.</li>
+      <li>Do not attempt to probe, scrape, or extract the Service's underlying data files or model weights outside the documented API surface.</li>
+      <li>Automated and high-frequency polling is permitted within the bounds of ordinary API usage; the Operator reserves the right to rate-limit or block traffic patterns that degrade service for other buyers.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="clause-num">§6</span>
+    <h2>Availability</h2>
+    <p>The Service is provided on an "as-is, as-available" basis with no uptime guarantee or formal SLA. The Operator will make reasonable efforts to maintain availability but is not liable for downtime, delayed data refreshes, or interrupted access.</p>
+  </section>
+
+  <section>
+    <span class="clause-num">§7</span>
+    <h2>Intellectual Property</h2>
+    <p>Underlying government statistics remain the property of their respective issuing bodies. The Operator's analysis methodology, scoring models (including the SJ-Score cost-justification model), and derived output are provided for the buyer's use in accordance with these Terms and may not be redistributed as a standalone competing data feed without prior written consent.</p>
+  </section>
+
+  <section>
+    <span class="clause-num">§8</span>
+    <h2>Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, the Operator's total liability for any claim arising from use of the Service is limited to the amount paid for the specific request giving rise to the claim. The Operator is not liable for indirect, incidental, or consequential damages, including losses arising from decisions made using Service output.</p>
+  </section>
+
+  <section>
+    <span class="clause-num">§9</span>
+    <h2>Changes to These Terms</h2>
+    <p>These Terms may be updated from time to time. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of the Service after an update constitutes acceptance of the revised Terms.</p>
+  </section>
+
+  <section>
+    <span class="clause-num">§10</span>
+    <h2>Contact</h2>
+    <p>Questions regarding these Terms or the Service can be raised by opening an issue on the project's <a href="https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/issues">GitHub Issues page</a>.</p>
+  </section>
+
+  <footer>
+    JP-Trade-Oracle-PRO · Icebreaker v13.9.0 · <a href="https://jptradefloworacle.github.io/">jptradefloworacle.github.io</a>
+  </footer>
+
+</div>
+</body>
+</html>
