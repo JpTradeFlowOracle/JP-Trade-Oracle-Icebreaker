@@ -1,0 +1,43 @@
+# JP-Trade-Oracle
+
+Japan's hidden price distortion (price gouging / nakanuki), as a pay-per-call API.
+
+Behind Japan's average CPI, individual categories drift. JP-Trade-Oracle detects those outliers
+across 35 categories (32 CPI + 3 service indices), synced to the latest published figures,
+and delivers them as an API that AI agents can pay per request.
+
+## How to buy (x402 / USDC on Base)
+
+- Account, API key, KYC: **not required**
+- Price: **$0.30 per request**
+- Payment: **x402 — USDC on Base (eip155:8453)**, automatic agent-friendly pay-per-call
+- Payment recipient: `0x2c4c85892A942D5670a74F77feDF0165817EEa7E`
+
+## Endpoints
+
+- Single category: `POST /x402/analyze`  (body: {"target_name":"cooking_oil","sector":"food_basic"})
+- All 35 categories: `GET /x402/summary`
+- Spec: `/openapi.json`
+
+## Live endpoint (base URL)
+
+https://uhts2utmnfyktco7h7heb5dhvq0nzmfs.lambda-url.ap-northeast-1.on.aws
+
+## Flow
+
+1. Send a request -> server answers `402 Payment Required`
+2. Pay USDC on Base via x402
+3. Retry -> full data is returned
+
+## Pages
+
+- JP (ja): https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/jp-trade-oracle.html
+- EN (en): https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/jp-trade-oracle-en.html
+- Response sample: https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/sample.html
+- README: https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/README.md
+- Terms: https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/terms-icebreaker.html
+
+## Notes
+
+- Data is derived from public official statistics and international data sources.
+- It is a data analysis API, not investment advice or a recommendation of any trade.
