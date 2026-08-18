@@ -31,7 +31,7 @@ https://uhts2utmnfyktco7h7heb5dhvq0nzmfs.lambda-url.ap-northeast-1.on.aws
 
 ## Pages
 
-- JP (ja): https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/jp-trade-oracle.html
+- JP (ja): https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/index.html
 - EN (en): https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/jp-trade-oracle-en.html
 - Response sample: https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/sample.html
 - README: https://github.com/JpTradeFlowOracle/JP-Trade-Oracle-Icebreaker/blob/main/README.md
