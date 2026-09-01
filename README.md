@@ -17,8 +17,8 @@ AI agents and financial models can programmatically query
 Japanese economic health in real time.
 
 - **Status:** Operational
-- **Endpoint:** `https://uhts2utmnfyktco7h7heb5dhvq0nzmfs.lambda-url.ap-northeast-1.on.aws`
-- **Docs:** `https://uhts2utmnfyktco7h7heb5dhvq0nzmfs.lambda-url.ap-northeast-1.on.aws/docs`
+- **Endpoint:** `https://lhxswhvmpnkkowdp2o7kwfhkoi0rwjal.lambda-url.ap-northeast-1.on.aws`
+- **Docs:** `https://lhxswhvmpnkkowdp2o7kwfhkoi0rwjal.lambda-url.ap-northeast-1.on.aws/docs`
 
 ## 💰 Pricing
 - **Rate:** $0.30 USDC per Analytical Request
