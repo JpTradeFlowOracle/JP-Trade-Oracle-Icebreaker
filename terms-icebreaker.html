@@ -188,7 +188,7 @@
   <section>
     <span class="clause-num">§1</span>
     <h2>The Service</h2>
-    <p>The Service provides structured, machine-readable economic indicators for the Japanese market — including CPI deviation deltas, FX-adjusted deltas, and the SJ-Score cost-justification model — derived from public government and institutional data sources (e-Stat, FRED, USDA GATS/MARS, Bank of Japan, Ministry of Health, Labour and Welfare). Output is returned via the <code>/analyze</code> and <code>/summary</code> endpoints described in the Service's OpenAPI specification.</p>
+    <p>The Service provides structured, machine-readable economic indicators for the Japanese market, including category-level price movement signals, contextual cost indicators, confidence, reason codes, and alert levels. Output is returned through the documented single-category analysis endpoints. Internal formulas, model parameters, feature weights, and source mappings are not part of the public service description.</p>
   </section>
 
   <section>
@@ -197,7 +197,7 @@
     <p>Access is granted per-request upon successful payment through one of the following channels:</p>
     <ul>
       <li><strong>Skyfire</strong> — a valid <code>pay</code> or <code>kya-pay</code> JWT presented via the <code>skyfire-pay-id</code> header, charged through the Skyfire settlement network.</li>
-      <li><strong>x402</strong> — a signed USDC payment authorization on Base Mainnet, presented via the x402 payment flow at the <code>/x402/*</code> endpoints.</li>
+      <li><strong>x402</strong> — a signed USDC payment authorization on Base Mainnet, presented via the x402 payment flow at the documented single-category analysis endpoint.</li>
     </ul>
     <p>Requests without a valid payment credential will receive an HTTP <code>402 Payment Required</code> response and no data will be returned.</p>
   </section>
@@ -211,7 +211,7 @@
   <section>
     <span class="clause-num">§4</span>
     <h2>Data Accuracy &amp; No Advice</h2>
-    <p>Data is aggregated from public sources on a best-effort basis and updated on a recurring schedule (typically every 12 hours). The Operator does not warrant the completeness, accuracy, or timeliness of any figure, score, or alert level returned by the Service. Output — including the SJ-Score, delta calculations, and alert levels (FAIR / WATCH / WARNING / EXTREME) — is informational only and does not constitute financial, investment, legal, or trading advice. Buyers are responsible for independently verifying any data point before relying on it for a decision.</p>
+    <p>Data is aggregated from public sources on a best-effort basis and updated on a recurring schedule (typically every 12 hours). The Operator does not warrant the completeness, accuracy, or timeliness of any figure, signal, confidence value, or alert level returned by the Service. Output — including category signals and alert levels (FAIR / WATCH / WARNING / EXTREME) — is informational only and does not constitute financial, investment, legal, or trading advice. Buyers are responsible for independently verifying any data point before relying on it for a decision.</p>
   </section>
 
   <section>
