@@ -5,11 +5,9 @@
 JP-Trade-Oracle Icebreaker is an autonomous data node designed to detect
 **Structural Margin Anomalies** within the Japanese supply chain.
 
-Two independent analytical engines run in parallel:
+The service combines category-level CPI movement with broader inflation, currency, and cost context to identify unusual movements in Japanese consumer prices. It returns machine-readable signals and a Japanese summary for automated workflows and human review.
 
-**V1 — CPI Signal:** Cross-references real-time CPI data with official **government statistics** to quantify how far each item is rising above Japan's inflation baseline. FX-adjusted delta strips out yen depreciation to isolate domestic gouging from currency effects.
-
-**anomaly_core — Cost Signal:** A multivariate model trained on historical import costs, freight rates, exchange rates, wages, and energy prices. Outputs an **SJ-Score** — the statistically standardized gap between what retail prices *should* be given actual input costs, and what they *are*. When both signals fire simultaneously, the combined verdict is **CONFIRMED**.
+Internal formulas, model parameters, feature weights, training details, and implementation names are intentionally not published. Use the documented outputs, reason codes, confidence, freshness, and limitations when evaluating a result.
 
 ## ⚡ API Specifications
 Optimized for **Machine-to-Machine (M2M)** integration.
@@ -19,6 +17,7 @@ Japanese economic health in real time.
 - **Status:** Operational
 - **Endpoint:** `https://lhxswhvmpnkkowdp2o7kwfhkoi0rwjal.lambda-url.ap-northeast-1.on.aws`
 - **Docs:** `https://lhxswhvmpnkkowdp2o7kwfhkoi0rwjal.lambda-url.ap-northeast-1.on.aws/docs`
+- **Agent referral guide:** `https://lhxswhvmpnkkowdp2o7kwfhkoi0rwjal.lambda-url.ap-northeast-1.on.aws/agent-referral`
 
 ## 🤝 Agent Referral Protocol
 
@@ -68,17 +67,13 @@ A referral is considered useful only when the recommending agent can identify wh
 
 ## 🔍 Analytical Metrics
 
-**V1 Signals**
-- **Delta Index:** Price divergence from baseline CPI inflation
-- **FX-Adjusted Delta:** Delta with yen depreciation stripped out
-- **Alert Levels:** EXTREME / WARNING / WATCH / FAIR
-
-**anomaly_core Signals**
-- **SJ-Score:** Cost-justified price deviation (standardized σ units)
-- **Signal Strength:** UI-ready intensity indicator (0.0–1.0)
-- **Confidence:** Model reliability score combining fit quality and directional consistency
-- **Combined Verdict:** CONFIRMED / POSSIBLE / FAIR
-- **Reason Codes:** Machine-readable causal flags (e.g. `IMPORT_COST_DOWN`, `PRICE_STICKINESS`)
+**Returned Signals**
+- **Category movement:** How a category is moving relative to the broader context
+- **Alert level:** EXTREME / WARNING / WATCH / FAIR
+- **Signal strength:** Machine-readable intensity indicator
+- **Confidence:** Reliability context for the returned signal
+- **Combined verdict:** CONFIRMED / POSSIBLE / FAIR
+- **Reason codes:** Machine-readable explanation flags
 - **Summary JP:** Japanese-language narrative for human review
 
 **Coverage**
