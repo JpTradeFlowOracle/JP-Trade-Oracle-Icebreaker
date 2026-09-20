@@ -389,6 +389,7 @@
       <button type="button" class="oracle-ui-tab is-active" data-product-tab="a">Product A</button>
       <button type="button" class="oracle-ui-tab" data-product-tab="b">Product B</button>
     </div>
+    <button type="button" class="oracle-ui-action" data-wallet-connect>ウォレットを接続</button>
     <div class="oracle-ui-panel" data-product-panel="a">
       <div class="oracle-ui-grid">
         <label>target_name<select data-product-a-target>
@@ -433,7 +434,6 @@
               <button type="button" class="oracle-ui-action" data-product-a-submit>購入して取得</button>
     </div>
     <div class="oracle-ui-panel is-hidden" data-product-panel="b">
-      <button type="button" class="oracle-ui-action" data-wallet-connect>ウォレットを接続</button>
       <div class="oracle-ui-targets">
         <button type="button" data-product-b-target="advertising">Advertising<span>購入して取得</span></button>
         <button type="button" data-product-b-target="information_services">Information Services<span>購入して取得</span></button>
@@ -441,6 +441,10 @@
       </div>
     </div>
     <div class="oracle-ui-status" data-oracle-ui-status>ウォレット未接続</div>
+    <div class="oracle-ui-payment is-hidden" data-oracle-ui-payment>
+      <pre class="oracle-ui-payment-details" data-oracle-ui-payment-details></pre>
+      <button type="button" class="oracle-ui-action" data-payment-confirm>この内容で支払って取得</button>
+    </div>
     <pre class="oracle-ui-result is-hidden" data-oracle-ui-result></pre>
   </section>
 

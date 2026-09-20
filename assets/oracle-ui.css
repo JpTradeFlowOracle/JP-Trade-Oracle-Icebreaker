@@ -27,6 +27,8 @@
 .oracle-ui-targets span { color: #94a3b8; display: block; font-size: 0.75rem; margin-top: 4px; }
 .oracle-ui-status { color: #94a3b8; font-size: 0.85rem; margin-top: 18px; }
 .oracle-ui-status.is-error { color: #f87171; }
+.oracle-ui-payment { margin-top: 14px; }
+.oracle-ui-payment-details { background: #0f172a; border: 1px solid #475569; border-radius: 8px; color: #cbd5e1; padding: 12px; white-space: pre-wrap; }
 .oracle-ui-result { background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #cbd5e1; margin-top: 12px; max-height: 360px; overflow: auto; padding: 14px; white-space: pre-wrap; }
 .oracle-ui-result:not(.is-hidden) { display: block; }
 .is-hidden { display: none !important; }
