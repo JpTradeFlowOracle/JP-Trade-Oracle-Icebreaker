@@ -384,7 +384,7 @@
 
   <section class="section oracle-ui-section" id="oracle-ui">
     <h2>🧪 ブラウザから試す</h2>
-    <p class="oracle-ui-lead">ウォレット接続後、Product Aの単品分析またはProduct BのTarget Featureをx402で取得できます。</p>
+    <p class="oracle-ui-lead">ウォレット接続だけでは支払いは発生しません。対象を選択し、「購入して取得」を押して支払内容を確認・署名した場合のみ支払いが実行されます。</p>
     <div class="oracle-ui-tabs" role="tablist" aria-label="Product selection">
       <button type="button" class="oracle-ui-tab is-active" data-product-tab="a">Product A</button>
       <button type="button" class="oracle-ui-tab" data-product-tab="b">Product B</button>
@@ -430,13 +430,14 @@
         </select></label>
         <label>sector<input type="text" data-product-a-sector value="food_basic" readonly></label>
       </div>
-      <button type="button" class="oracle-ui-action" data-product-a-submit>ウォレット接続して分析</button>
+              <button type="button" class="oracle-ui-action" data-product-a-submit>購入して取得</button>
     </div>
     <div class="oracle-ui-panel is-hidden" data-product-panel="b">
+      <button type="button" class="oracle-ui-action" data-wallet-connect>ウォレットを接続</button>
       <div class="oracle-ui-targets">
-        <button type="button" data-product-b-target="advertising">Advertising<span>1 target purchase</span></button>
-        <button type="button" data-product-b-target="information_services">Information Services<span>1 target purchase</span></button>
-        <button type="button" data-product-b-target="telecommunication">Telecommunication<span>1 target purchase</span></button>
+        <button type="button" data-product-b-target="advertising">Advertising<span>購入して取得</span></button>
+        <button type="button" data-product-b-target="information_services">Information Services<span>購入して取得</span></button>
+        <button type="button" data-product-b-target="telecommunication">Telecommunication<span>購入して取得</span></button>
       </div>
     </div>
     <div class="oracle-ui-status" data-oracle-ui-status>ウォレット未接続</div>
