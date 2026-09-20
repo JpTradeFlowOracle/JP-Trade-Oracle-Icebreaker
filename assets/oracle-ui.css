@@ -1,0 +1,32 @@
+.oracle-ui-section {
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 28px;
+  background: #111827;
+}
+.oracle-ui-lead { color: #94a3b8; margin: -10px 0 20px; }
+.oracle-ui-tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+.oracle-ui-tab, .oracle-ui-action, .oracle-ui-targets button {
+  border: 1px solid #475569;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #e2e8f0;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px 16px;
+}
+.oracle-ui-tab.is-active, .oracle-ui-action { background: #2563eb; border-color: #60a5fa; }
+.oracle-ui-panel { margin-top: 8px; }
+.oracle-ui-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.oracle-ui-grid label { color: #94a3b8; display: grid; gap: 6px; font: 0.8rem 'Fira Code', monospace; }
+.oracle-ui-grid input, .oracle-ui-grid select { background: #0f172a; border: 1px solid #475569; border-radius: 6px; color: #e2e8f0; padding: 9px; }
+.oracle-ui-action { margin-top: 16px; }
+.oracle-ui-targets { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.oracle-ui-targets button { text-align: left; }
+.oracle-ui-targets button:hover, .oracle-ui-tab:hover { border-color: #60a5fa; }
+.oracle-ui-targets span { color: #94a3b8; display: block; font-size: 0.75rem; margin-top: 4px; }
+.oracle-ui-status { color: #94a3b8; font-size: 0.85rem; margin-top: 18px; }
+.oracle-ui-status.is-error { color: #f87171; }
+.oracle-ui-result { background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #cbd5e1; margin-top: 12px; max-height: 360px; overflow: auto; padding: 14px; white-space: pre-wrap; }
+.oracle-ui-result:not(.is-hidden) { display: block; }
+.is-hidden { display: none !important; }

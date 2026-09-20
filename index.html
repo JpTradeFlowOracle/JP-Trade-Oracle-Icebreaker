@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JP-Trade-Oracle-PRO — 日本の物価中抜き検出オラクル</title>
+<link rel="stylesheet" href="assets/oracle-ui.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -224,7 +225,7 @@
     <span class="badge x402">x402 USDC 決済対応</span>
   </div>
   <div style="margin-top: 32px;">
-    <a href="#try" class="cta-button">API を試す</a>
+    <a href="#oracle-ui" class="cta-button">API を試す</a>
     <a href="#docs" class="cta-button secondary">ドキュメント</a>
   </div>
 </section>
@@ -381,6 +382,67 @@
     </table>
   </section>
 
+  <section class="section oracle-ui-section" id="oracle-ui">
+    <h2>🧪 ブラウザから試す</h2>
+    <p class="oracle-ui-lead">ウォレット接続後、Product Aの単品分析またはProduct BのTarget Featureをx402で取得できます。</p>
+    <div class="oracle-ui-tabs" role="tablist" aria-label="Product selection">
+      <button type="button" class="oracle-ui-tab is-active" data-product-tab="a">Product A</button>
+      <button type="button" class="oracle-ui-tab" data-product-tab="b">Product B</button>
+    </div>
+    <div class="oracle-ui-panel" data-product-panel="a">
+      <div class="oracle-ui-grid">
+        <label>target_name<select data-product-a-target>
+          <option value="gasoline" data-sector="energy">gasoline</option>
+          <option value="kerosene" data-sector="energy">kerosene</option>
+          <option value="electricity" data-sector="energy">electricity</option>
+          <option value="city_gas" data-sector="energy">city_gas</option>
+          <option value="lp_gas" data-sector="energy">lp_gas</option>
+          <option value="water_bill" data-sector="energy">water_bill</option>
+          <option value="rice" data-sector="food_basic">rice</option>
+          <option value="bread" data-sector="food_basic">bread</option>
+          <option value="noodle" data-sector="food_basic">noodle</option>
+          <option value="beef_import" data-sector="food_basic">beef_import</option>
+          <option value="beef_domestic" data-sector="food_basic">beef_domestic</option>
+          <option value="egg" data-sector="food_basic">egg</option>
+          <option value="milk" data-sector="food_basic">milk</option>
+          <option value="cooking_oil" data-sector="food_basic">cooking_oil</option>
+          <option value="sugar" data-sector="food_basic">sugar</option>
+          <option value="frozen_food" data-sector="food_process">frozen_food</option>
+          <option value="instant_noodle" data-sector="food_process">instant_noodle</option>
+          <option value="confectionery" data-sector="food_process">confectionery</option>
+          <option value="beverages" data-sector="food_process">beverages</option>
+          <option value="alcohol" data-sector="food_process">alcohol</option>
+          <option value="comm_fee" data-sector="it_infra">comm_fee</option>
+          <option value="it_service" data-sector="it_infra">it_service</option>
+          <option value="advertising" data-sector="it_infra">advertising</option>
+          <option value="labor_dispatch" data-sector="it_infra">labor_dispatch</option>
+          <option value="delivery" data-sector="logistics">delivery</option>
+          <option value="transport" data-sector="logistics">transport</option>
+          <option value="rent" data-sector="housing">rent</option>
+          <option value="house_repair" data-sector="housing">house_repair</option>
+          <option value="medical_care" data-sector="medical">medical_care</option>
+          <option value="medicines" data-sector="medical">medicines</option>
+          <option value="appliances" data-sector="industrial">appliances</option>
+          <option value="restaurant_fee" data-sector="industrial">restaurant_fee</option>
+          <option value="hotel_fee" data-sector="industrial">hotel_fee</option>
+          <option value="japan_total" data-sector="macro">japan_total</option>
+          <option value="japan_core" data-sector="macro">japan_core</option>
+        </select></label>
+        <label>sector<input type="text" data-product-a-sector value="food_basic" readonly></label>
+      </div>
+      <button type="button" class="oracle-ui-action" data-product-a-submit>ウォレット接続して分析</button>
+    </div>
+    <div class="oracle-ui-panel is-hidden" data-product-panel="b">
+      <div class="oracle-ui-targets">
+        <button type="button" data-product-b-target="advertising">Advertising<span>1 target purchase</span></button>
+        <button type="button" data-product-b-target="information_services">Information Services<span>1 target purchase</span></button>
+        <button type="button" data-product-b-target="telecommunication">Telecommunication<span>1 target purchase</span></button>
+      </div>
+    </div>
+    <div class="oracle-ui-status" data-oracle-ui-status>ウォレット未接続</div>
+    <pre class="oracle-ui-result is-hidden" data-oracle-ui-result></pre>
+  </section>
+
   <section class="section" id="try">
     <h2>🚀 今すぐ試す</h2>
     <h3>Python (x402)</h3>
@@ -438,5 +500,6 @@ print(resp.json())</pre>
   </p>
 </footer>
 
+<script src="assets/oracle-ui.js"></script>
 </body>
 </html>
