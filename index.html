@@ -284,6 +284,17 @@
     </table>
   </section>
 
+  <section class="section" id="product-b">
+    <h2>🧭 Product B — 経済Feature</h2>
+    <p>Product Bは、Product Aの品目別価格シグナルとは別に、業種・市場の活動や構造を確認するResearch Featureです。1回の購入で1 Targetを取得します。Bundle購入には対応していません。</p>
+    <div class="feature-grid">
+      <div class="feature-card"><h3>Advertising</h3><p>広告サービスの月次活動・売上指標です。需要そのもの、コスト、価格圧力、因果効果を直接示すものではありません。</p></div>
+      <div class="feature-card"><h3>Information Services</h3><p>情報サービスの月次活動・売上指標です。需要の間接的なproxyとして利用できますが、コストや因果関係は示しません。</p></div>
+      <div class="feature-card"><h3>Telecommunication</h3><p>Information and Communicationsの賃金・産業構造に関するFeatureです。</p></div>
+    </div>
+    <p class="note">Product BのFeatureは、価格・コスト・需要・パススルー・因果効果を自動的に証明するものではありません。各Featureの定義・対象範囲・制約を確認して利用してください。</p>
+  </section>
+
   <section class="section" id="docs">
     <h2>🔌 API エンドポイント</h2>
 
@@ -383,8 +394,8 @@
   </section>
 
   <section class="section oracle-ui-section" id="oracle-ui">
-    <h2>🧪 ブラウザから試す</h2>
-    <p class="oracle-ui-lead">ウォレット接続だけでは支払いは発生しません。対象を選択し、「購入して取得」を押して支払内容を確認・署名した場合のみ支払いが実行されます。</p>
+    <h2>💳 ブラウザから購入</h2>
+    <p class="oracle-ui-lead">支払いにはBase Mainnet上のUSDC残高が必要です。ウォレット接続だけでは支払いは発生しません。対象を選択し、「購入して取得」後に支払内容を確認・署名した場合のみ支払いが実行されます。</p>
     <div class="oracle-ui-tabs" role="tablist" aria-label="Product selection">
       <button type="button" class="oracle-ui-tab is-active" data-product-tab="a">Product A</button>
       <button type="button" class="oracle-ui-tab" data-product-tab="b">Product B</button>
